@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "starkv-serve"
+version = "0.1.0"
+description = "STAR-KV low-rank KV cache compression served with vLLM"
+requires-python = ">=3.10"
+# Install vLLM first; on CUDA 12.x drivers use the +cu129 wheel from the vLLM release page.
+dependencies = ["vllm==0.29.0"]
+
+[project.entry-points."vllm.general_plugins"]
+starkv_serve = "starkv_serve.plugin:register"
+
+[tool.setuptools.packages.find]
+include = ["starkv_serve*"]
